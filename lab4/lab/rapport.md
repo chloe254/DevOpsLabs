@@ -63,11 +63,11 @@ cd lab/part-1
 vagrant up
 ```
 
-![vagrant up](images/vagrant_up3.png)
+![vagrant up](images/vagrant_up3.jpeg)
 
 Vérification dans VirtualBox :
 
-![VM running](images/running_virtual4.png)
+![VM running](images/running_virtual4.jpeg)
 
 ---
 
@@ -79,7 +79,7 @@ vagrant halt
 vagrant destroy
 ```
 
-![Test commandes](images/vagrant_test5.png)
+![Test commandes](images/vagrant_test5.jpeg)
 
 ---
 
@@ -96,9 +96,9 @@ ls
 pwd
 ```
 
-![ls](images/ls_6.png)  
-![ssh](images/vagrant_ssh7.png)  
-![vm](images/vm8.png)
+![ls](images/ls_6.jpeg)  
+![ssh](images/vagrant_ssh7.jpeg)  
+![vm](images/vm8.jpeg)
 
 ---
 
@@ -117,8 +117,8 @@ Puis :
 vagrant provision
 ```
 
-![Vagrantfile](images/vagrant_file9.png)  
-![Provision](images/vagrant_provision11.png)
+![Vagrantfile](images/vagrant_file9.jpeg)  
+![Provision](images/vagrant_provision11.jpeg)
 
 Vérification :
 
@@ -127,7 +127,7 @@ vagrant ssh
 cat /etc/hosts
 ```
 
-![cat hosts](images/cat_16.png)
+![cat hosts](images/cat_16.jpeg)
 
 ---
 
@@ -148,14 +148,14 @@ Puis :
 vagrant provision
 ```
 
-![Script](images/script_config14.png)  
-![Provision 2](images/vag_provision15.png)
+![Script](images/script_config14.jpeg)  
+![Provision 2](images/vag_provision15.jpeg)
 
 ---
 
 ## 7. Gestion d’erreurs
 
-![Erreur vagrant](images/vagrant_fail12.png)
+![Erreur vagrant](images/vagrant_fail12.jpeg)
 
 ---
 
@@ -177,8 +177,8 @@ Utilisation de `ansible_local` :
 cd lab/part-2
 ```
 
-![part2](images/part17.png)  
-![run.yml](images/run_yml18.png)
+![part2](images/part17.jpeg)  
+![run.yml](images/run_yml18.jpeg)
 
 ---
 
@@ -210,7 +210,7 @@ http://localhost:8080
 
 Si la page GitLab apparaît :
 
-![GitLab page](images/gitlab21.png)
+![GitLab page](images/gitlab21.jpeg)
 
 ---
 
@@ -223,7 +223,7 @@ vagrant ssh
 sudo cat /etc/gitlab/initial_root_password
 ```
 
-![password](images/password.png)
+![password](images/password.jpeg)
 
 ---
 
@@ -284,9 +284,9 @@ Même chose pour :
 vagrant status
 ```
 
-![status](images/vagrant_status19.png)
+![status](images/vagrant_status19.jpeg)
 
-![VirtualBox](images/VM_20.png)
+![VirtualBox](images/VM_20.jpeg)
 
 ---
 
