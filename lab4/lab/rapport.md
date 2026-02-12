@@ -7,7 +7,6 @@ Ce lab a pour objectif d’apprendre les principes de l’Infrastructure as Code
 - **Partie 1 : Approche impérative** (Vagrant + Shell Provisioner)
 - **Partie 2 : Approche déclarative** (GitLab avec Vagrant + Ansible)
 - **Partie 3 : Health Checks GitLab**
-- Bonus
 
 ---
 
