@@ -292,7 +292,8 @@ Même chose pour :
 
 - readiness
 
-![readiness](images/readiness.jpeg)
+![readiness](images/readness.jpeg)
+
 - liveness
 
 ![liveness](images/liveness.jpeg)
