@@ -70,7 +70,6 @@ Vérification dans VirtualBox :
 ![VM running](images/running_virtual4.jpeg)
 VM créée et démarrée dans VirtualBox
 ---
-
 ## 3. Commandes utiles
 
 ```bash
@@ -311,7 +310,7 @@ ansible-playbook /vagrant/playbooks/run.yml \
 
 Même chose pour :
 
-- readiness
+- readness
 
 ![readiness](images/readness.jpeg)
 GitLab est prêt à traiter des requêtes
