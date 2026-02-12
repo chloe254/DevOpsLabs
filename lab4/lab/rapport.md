@@ -298,7 +298,9 @@ Même chose pour :
 ![liveness](images/liveness.jpeg)
 
 
+## 3. affichage du résultat health checks
 
+![health](images/fini_26.jpeg)
 
 ---
 
