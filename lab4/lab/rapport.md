@@ -68,7 +68,7 @@ vagrant up
 Vérification dans VirtualBox :
 
 ![VM running](images/running_virtual4.jpeg)
-
+VM créée et démarrée dans VirtualBox
 ---
 
 ## 3. Commandes utiles
@@ -78,7 +78,16 @@ vagrant status
 vagrant halt
 vagrant destroy
 ```
+vagrant status:
+running (virtualbox)
+ Ça veut dire que la VM est active et prête.
 
+vagrant ssh:
+[vagrant@localhost ~]$
+Ça signifie :
+SSH fonctionne
+La VM est accessible
+Le réseau est configuré correctement
 ![Test commandes](images/vagrant_test5.jpeg)
 
 ---
@@ -128,7 +137,8 @@ vagrant ssh
 cat /etc/hosts
 ```
 ![cat hosts](images/localhost13.jpeg)
-
+Résultat: 127.0.0.1 mydomain-1.local
+Ça veut dire que Shell Provisioner a bien exécuté la commande automatiquement.
 ---
 Vérification :
 
@@ -137,6 +147,11 @@ vagrant ssh
 cat /etc/vagrant_provisionned_at
 ```
 ![cat provisionned](images/cat_16.jpeg)
+Résultat: la date 
+Ça prouve que :
+Le script multi-ligne fonctionne
+Le provisioning peut créer/modifier des fichiers système
+L’approche impérative exécute des commandes directes
 
 ## 6. Shell Provisioner — Écrire la date
 
@@ -219,10 +234,15 @@ Ouvrir :
 http://localhost:8080
 ```
 
+
+L’application répond
 Si la page GitLab apparaît :
 
 ![GitLab page](images/gitlab21.jpeg)
-
+Le port forwarding fonctionne (VM → Windows)
+GitLab écoute sur le port 80 interne
+Vagrant redirige vers 8080
+Nginx fonctionne
 ---
 
 ## 4. Mot de passe root
@@ -261,7 +281,8 @@ Résultat attendu :
 ```
 GitLab OK
 ```
-
+Le service principal répond
+L’application n’est pas crashée
 ---
 
 ## 2. Lancer les healthchecks via Ansible
@@ -293,7 +314,11 @@ Même chose pour :
 - readiness
 
 ![readiness](images/readness.jpeg)
-
+GitLab est prêt à traiter des requêtes
+Les services critiques sont opérationnels
+Redis fonctionne
+PostgreSQL fonctionne
+Les dépendances sont OK
 - liveness
 
 ![liveness](images/liveness.jpeg)
@@ -301,7 +326,8 @@ Même chose pour :
 
 
 ![liveness](images/liveness.jpeg)
-
+Le processus GitLab est vivant
+Le service tourne correctement
 
 ## 3. affichage du résultat health checks
 
