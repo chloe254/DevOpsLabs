@@ -274,6 +274,7 @@ ansible-playbook /vagrant/playbooks/run.yml \
   --list-tags \
   -i /tmp/vagrant-ansible/inventory/vagrant_ansible_local_inventory
 ```
+![tag](images/lister_tag.jpeg)
 
 Lancer un tag :
 
@@ -282,11 +283,21 @@ ansible-playbook /vagrant/playbooks/run.yml \
   --tags healthcheck \
   -i /tmp/vagrant-ansible/inventory/vagrant_ansible_local_inventory
 ```
+![tag](images/lancer_tag.jpeg)
+
+
+
 
 Même chose pour :
 
 - readiness
+
+![readiness](images/readiness.jpeg)
 - liveness
+
+![liveness](images/liveness.jpeg)
+
+
 
 
 ---
