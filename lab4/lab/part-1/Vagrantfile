@@ -34,6 +34,7 @@ echo I am provisioning...
 date > /etc/vagrant_provisioned_at
 SCRIPT
 
+
 config.vm.provision "shell", inline: $script
 
 
