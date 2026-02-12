@@ -99,7 +99,7 @@ pwd
 
  
 ![ssh](images/vagrant_ssh7.jpeg)  
-
+![ssh](images/Vagrant_ssh.jpeg)  
 ![vm](images/vm8.jpeg)
 
 ---
@@ -128,10 +128,16 @@ Vérification :
 vagrant ssh
 cat /etc/hosts
 ```
-
-![cat hosts](images/cat_16.jpeg)
+![cat hosts](images/localhost13.jpeg)
 
 ---
+Vérification :
+
+```bash
+vagrant ssh
+cat /etc/vagrant_provisionned_at
+```
+![cat provisionned](images/cat_16.jpeg)
 
 ## 6. Shell Provisioner — Écrire la date
 
