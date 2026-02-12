@@ -53,6 +53,7 @@ cd lab/part-1
 ```
 
 ![Bon dossier](images/bon_endroit2.jpeg)
+![ls](images/ls_6.jpeg) 
 
 ---
 
@@ -95,8 +96,9 @@ ls
 pwd
 ```
 
-![ls](images/ls_6.jpeg)  
+ 
 ![ssh](images/vagrant_ssh7.jpeg)  
+
 ![vm](images/vm8.jpeg)
 
 ---
