@@ -11,7 +11,6 @@ Ce lab a pour objectif d’apprendre les principes de l’Infrastructure as Code
 
 ---
 
-# 1️⃣ Pré-requis
 
 ### Installation des outils
 
@@ -28,7 +27,7 @@ Disable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
 
 ---
 
-# 2️⃣ Avant de commencer
+#  Avant de commencer
 
 Ajouter la box CentOS 7 :
 
@@ -54,7 +53,7 @@ Se placer dans :
 cd lab/part-1
 ```
 
-![Bon dossier](images/bon_endroit2.png)
+![Bon dossier](images/bon_endroit2.jpg)
 
 ---
 
