@@ -195,7 +195,7 @@ cd lab/part-2
 vagrant up
 ```
 
-Cette étape installe :
+Cette étape installe  : 
 
 - curl
 - SSH
@@ -207,7 +207,7 @@ Cette étape installe :
 
 ---
 
-## 3. Test navigateur
+## 3 Test navigateur
 
 Ouvrir :
 
