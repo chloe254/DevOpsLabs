@@ -53,7 +53,7 @@ Se placer dans :
 cd lab/part-1
 ```
 
-![Bon dossier](images/bon_endroit2.jpg)
+![Bon dossier](images/bon_endroit2.jpeg)
 
 ---
 
