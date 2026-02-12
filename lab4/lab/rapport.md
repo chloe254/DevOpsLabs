@@ -262,6 +262,7 @@ GitLab OK
 
 ## 2. Lancer les healthchecks via Ansible
 
+
 Lister les tags :
 
 ```bash
@@ -282,6 +283,7 @@ Même chose pour :
 
 - readiness
 - liveness
+
 
 ---
 
