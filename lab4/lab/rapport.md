@@ -205,6 +205,10 @@ Cette étape installe  :
 - GitLab CE
 - Base de données
 
+Validation : 
+
+![GitLab fini](images/Vagrant_up_fin.jpeg)
+
 ---
 
 ## 3 Test navigateur
@@ -253,7 +257,7 @@ curl http://127.0.0.1:8080/-/health
 ```
 
 Résultat attendu :
-
+![partie3](images/curl23.jpeg)
 ```
 GitLab OK
 ```
