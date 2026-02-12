@@ -70,7 +70,6 @@ Vérification dans VirtualBox :
 ![VM running](images/running_virtual4.jpeg)
 
 ---
-
 ## 3. Commandes utiles
 
 ```bash
@@ -290,7 +289,7 @@ ansible-playbook /vagrant/playbooks/run.yml \
 
 Même chose pour :
 
-- readiness
+- readness
 
 ![readiness](images/readness.jpeg)
 
