@@ -1,10 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: kubernetes-bootcamp-service
+  name: kubernetes-bootcamp
 spec:
-  type: NodePort
+  type: NodePort                  
   selector:
-    app: # TO COMPLETE
+    app: kubernetes-bootcamp
   ports:
-    - port: # TO COMPLETE
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
