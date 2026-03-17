@@ -42,7 +42,7 @@ Vérifier que le pod est bien lancé.
 kubectl get pods
 
 ```
-![Pods running](images/verifPodsExex.jpeg)
+![Pods running](images/verif.jpeg)
 2.3 Logs
  Explication
 
@@ -63,7 +63,7 @@ Voir les informations système du conteneur.
 kubectl exec $POD_NAME -- cat /etc/os-release
 ```
 
-![OS info](images/os_info.png)--
+![OS info](images/openJS.png)--
 2.5 Open Shell
  Explication
 
