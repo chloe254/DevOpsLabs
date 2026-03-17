@@ -63,7 +63,7 @@ Voir les informations système du conteneur.
 kubectl exec $POD_NAME -- cat /etc/os-release
 ```
 
-![OS info](images/openJS.png)--
+![OS info](images/openJS.jpeg)--
 2.5 Open Shell
  Explication
 
@@ -176,6 +176,11 @@ kubectl scale deployments/kubernetes-bootcamp --replicas=2
 Mettre à jour l’application et comprendre le rollback.
 
 5.1 Update v2
+Observation dans le navigateur :
+
+Si tu rafraîchis avec CTRL+F5 pendant le déploiement, certaines pages peuvent s’afficher avec l’ancienne version et d’autres avec la nouvelle.
+
+Pourquoi ? → Kubernetes met à jour les pods progressivement (rolling update). Les anciens pods répondent encore jusqu’à ce que les nouveaux soient prêts.
 ```bash
 kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=jocatalin/kubernetes-bootcamp:v2
 ```
@@ -211,6 +216,11 @@ kubectl rollout undo deployments/kubernetes-bootcamp
 
 ![Rollback](images/53.jpeg)
 ![Rollback](images/54V3.jpeg)
+![Rollback](images/55.jpeg)
+![Rollback](images/56.jpeg)
+![Rollback](images/57.jpeg)
+
+
 6️- Deployment with YAML
  Objectif
 
@@ -222,7 +232,7 @@ kubectl apply -f deployment.yaml
 ```
 
 
-![Pods YAML](images/pods_yaml.png)
+![Pods YAML](images/61.jpeg)
  Question
 
 Are the pods running?
@@ -236,7 +246,7 @@ kubectl apply -f service.yaml
 ```
 
 
-![Service YAML](images/service_yaml.png)
+![Service YAML](images/62.jpeg)
  Question
 
 Can you access the service?
@@ -248,7 +258,10 @@ Can you access the service?
 ```bash
 kubectl apply -f deployment.yaml
 ```
-![3 pods](images/scale_3.png)
+![3 pods](images/63.jpeg)
+![3 pods](images/64.jpeg)
+
+
  Question
 
 Are you hitting different replicas?
