@@ -176,3 +176,207 @@ Le pipeline CI/CD a été adapté à Render :
 -Application accessible publiquement
 
 Lab entièrement résolu
+
+Lab 7 – Containers with Docker
+1. Contexte et objectif du lab
+
+Ce lab avait pour objectif de découvrir l’utilisation de Docker et Docker Compose à travers la conteneurisation d’une application Node.js simple, puis d’une application multi-conteneurs avec Redis.
+
+L’objectif principal était de :
+
+comprendre le fonctionnement de Docker,
+
+construire une image à partir d’un Dockerfile,
+
+exécuter un conteneur avec différentes options,
+
+partager une image Docker via Docker Hub,
+
+utiliser Docker Compose pour lancer plusieurs services ensemble,
+
+comprendre la persistance des données avec les volumes Docker.
+
+2. Application dans un contexte réel d’entreprise
+
+Dans un contexte professionnel, Docker est largement utilisé pour standardiser les environnements de développement, de test et de production.
+
+Cela permet :
+
+d’exécuter une application de manière identique sur toutes les machines,
+
+d’éviter les problèmes de configuration liés aux différences d’environnement,
+
+de déployer rapidement une application avec toutes ses dépendances,
+
+de faciliter le travail en équipe grâce au partage d’images via Docker Hub ou des registres privés,
+
+d’orchestrer plusieurs services ensemble, comme une application web et une base de données.
+
+Docker Compose est particulièrement utile en entreprise pour décrire et lancer facilement une architecture composée de plusieurs conteneurs, par exemple une API, une base Redis ou un autre service de support.
+
+3. Difficultés rencontrées et solutions
+Problème 1 : Chemin des dossiers incorrect ou fichiers du lab absents
+
+Difficulté :
+Au début du lab, les dossiers hello-world-docker et hello-world-docker-compose n’étaient pas visibles. Cela venait du fait que les fichiers du TP n’avaient pas encore été clonés correctement ou qu’ils se trouvaient dans un mauvais emplacement.
+
+Solution :
+Nous avons vérifié le clonage du dépôt et l’emplacement réel des fichiers sur la machine. Une fois le bon dépôt récupéré et les fichiers placés dans le bon répertoire, il a été possible d’accéder aux dossiers du lab et de poursuivre le travail normalement.
+
+Problème 2 : Confusion entre fichiers et dossiers
+
+Difficulté :
+Une confusion a été rencontrée lors de l’utilisation du terminal, notamment en essayant d’utiliser la commande cd sur un fichier comme server.js. Cette erreur empêchait d’accéder correctement aux éléments du projet.
+
+Solution :
+Nous avons revu la différence entre un fichier et un dossier. La commande cd permet uniquement de se déplacer dans un répertoire, tandis qu’un fichier comme server.js doit être ouvert ou modifié avec un éditeur de code. Cela a permis une meilleure maîtrise de la navigation dans l’arborescence du projet.
+
+Problème 3 : Nom d’image Docker incorrect ou image absente en local
+
+Difficulté :
+Des erreurs sont apparues lors de l’exécution de conteneurs parce que Docker tentait de récupérer automatiquement une image depuis Docker Hub, alors que celle-ci n’existait pas encore en ligne et n’avait pas encore été construite localement.
+
+Solution :
+Nous avons compris qu’il fallait d’abord construire l’image localement avec docker build avant de pouvoir la lancer avec docker run. Nous avons aussi vérifié soigneusement les noms donnés aux images afin d’éviter les erreurs liées à un mauvais tag ou à une image inexistante.
+
+Problème 4 : Oubli de reconstruire l’image après modification
+
+Difficulté :
+Après modification du fichier server.js, les changements n’apparaissaient pas dans le conteneur lancé. Cela venait du fait que l’image Docker n’avait pas été reconstruite après les modifications du code.
+
+Solution :
+Nous avons compris qu’une image Docker est une version figée de l’application au moment du build. Il était donc nécessaire de relancer la commande de build après chaque modification du code afin que les changements soient pris en compte dans les nouveaux conteneurs.
+
+Problème 5 : Erreur Node.js dans le conteneur
+
+Difficulté :
+Le conteneur s’arrêtait immédiatement car server.js ou ses dépendances n’étaient pas correctement copiées ou installées dans l’image Docker. L’application Node.js ne pouvait donc pas démarrer.
+
+Solution :
+Nous avons vérifié le contenu du Dockerfile, notamment :
+
+la copie des fichiers du projet dans l’image,
+
+l’installation des dépendances avec npm install,
+
+la présence du bon fichier de démarrage.
+
+Après correction de ces éléments, le conteneur a pu démarrer correctement.
+
+Problème 6 : Conflits avec des conteneurs déjà en cours d’exécution
+
+Difficulté :
+Certaines commandes ont provoqué des conflits car des conteneurs lancés précédemment étaient encore actifs. Cela créait des problèmes lors des nouveaux démarrages.
+
+Solution :
+Nous avons utilisé les commandes docker ps, docker stop et, si nécessaire, la suppression des anciens conteneurs afin de repartir d’un environnement propre avant de relancer les nouveaux conteneurs.
+
+Problème 7 : Erreurs de connexion et de mapping des ports
+
+Difficulté :
+Des erreurs de connexion ont été rencontrées lors du lancement des conteneurs, notamment à cause d’un mauvais mapping des ports ou d’un port déjà utilisé par un autre service.
+
+Solution :
+Nous avons vérifié la correspondance entre le port de la machine locale et celui du conteneur. Cela a permis d’accéder correctement à l’application depuis le navigateur et d’éviter les conflits de ports déjà occupés.
+
+Problème 8 : Perte des données après suppression des conteneurs
+
+Difficulté :
+Dans la partie Docker Compose avec Redis, le compteur revenait à zéro après suppression et recréation des conteneurs. Les données n’étaient donc pas conservées.
+
+Solution :
+Nous avons compris que les données Redis étaient stockées uniquement dans le conteneur. Lorsqu’il était supprimé, les données disparaissaient également.
+Pour résoudre ce problème, nous avons ajouté un Docker Volume monté sur le dossier /data de Redis, ce qui a permis d’assurer la persistance des données même après suppression et recréation des conteneurs.
+
+4. Étapes de réalisation du lab
+Étape 1 : Installation et vérification de Docker
+
+installation de Docker Desktop,
+
+vérification du bon fonctionnement avec docker run hello-world.
+
+Étape 2 : Construction d’une image Docker simple
+
+ouverture du dossier hello-world-docker,
+
+analyse des fichiers server.js, package.json et Dockerfile,
+
+construction de l’image avec docker build -t hello-world-docker .,
+
+vérification de la présence de l’image avec docker images.
+
+Étape 3 : Exécution d’un conteneur
+
+lancement du conteneur avec docker run -p 12345:8080 -d hello-world-docker,
+
+vérification du fonctionnement avec docker ps,
+
+consultation de l’application dans le navigateur sur localhost:12345,
+
+affichage des logs avec docker logs,
+
+arrêt du conteneur avec docker stop.
+
+Étape 4 : Modification et partage de l’image
+
+modification du message affiché dans server.js,
+
+reconstruction de l’image Docker avec un nouveau nom,
+
+création d’un compte Docker Hub,
+
+ajout du tag Docker Hub à l’image,
+
+connexion avec docker login,
+
+publication de l’image avec docker push,
+
+récupération de l’image par un autre utilisateur avec docker pull.
+
+Étape 5 : Utilisation de Docker Compose
+
+ouverture du dossier hello-world-docker-compose,
+
+construction de l’image de l’application,
+
+complétion du fichier docker-compose.yaml,
+
+démarrage des services avec docker-compose up,
+
+test de l’application sur localhost:5000,
+
+observation du compteur incrémenté à chaque actualisation.
+
+Étape 6 : Mise en place de la persistance
+
+suppression des conteneurs avec docker-compose rm,
+
+constat de la réinitialisation du compteur,
+
+ajout d’un volume Docker pour Redis,
+
+redémarrage des conteneurs,
+
+vérification que le compteur conservait désormais sa valeur.
+
+5. État d’avancement
+
+Docker Desktop installé et fonctionnel,
+
+image Docker construite correctement,
+
+conteneur simple exécuté avec succès,
+
+compréhension du rôle du Dockerfile et du build,
+
+application accessible via le navigateur,
+
+image publiée sur Docker Hub,
+
+application multi-conteneurs lancée avec Docker Compose,
+
+fonctionnement de Redis vérifié,
+
+persistance des données mise en place avec un volume Docker.
+
+Le lab est entièrement terminé.
