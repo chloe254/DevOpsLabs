@@ -14,6 +14,9 @@ minikube status
 
 
 ![Minikube status](images/telechargementMinikube.jpeg)
+
+
+
 2️- Learn to use kubectl commands
  Objectif
 Créer et manipuler un pod Kubernetes.
@@ -27,7 +30,10 @@ Créer un deployment contenant un pod avec une application Node.js.
 kubectl create deployment kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1
 ```
 
-![Deployment created](images/deployment_created.png)
+![Deployment created](images/demarrageMinikibe.jpeg)
+Utilisation des commandes de base : 
+
+![Commandes ](images/appUseCommandesBase.jpeg)
 2.2 List Pods
 Explication
 Vérifier que le pod est bien lancé.
@@ -36,7 +42,7 @@ Vérifier que le pod est bien lancé.
 kubectl get pods
 
 ```
-![Pods running](images/pods_running.png)
+![Pods running](images/verifPodsExex.jpeg)
 2.3 Logs
  Explication
 
@@ -47,7 +53,7 @@ kubectl logs $POD_NAME
 ```
 
 
-![Pod logs](images/pod_logs.png)
+![Pod logs](images/affLogPods.jpeg) 
 2.4 Execute Command in Pod
 Explication
 
@@ -57,7 +63,7 @@ Voir les informations système du conteneur.
 kubectl exec $POD_NAME -- cat /etc/os-release
 ```
 
-![OS info](images/os_info.png)
+![OS info](images/os_info.png)--
 2.5 Open Shell
  Explication
 
@@ -68,7 +74,7 @@ kubectl exec -ti $POD_NAME -- bash
 ```
 
 
-![Shell in pod](images/shell_pod.png)
+![Shell in pod](images/shell_pod.png)--
 2.6 Find server.js
  Explication
 
@@ -80,7 +86,7 @@ ls
 find / -name "server.js" 2>/dev/null
 ```
 
-![server.js](images/server_js.png)
+![server.js](images/deploiAvecNodeJs.jpeg)
 2.7 Test App Inside Pod
  Explication
 
@@ -108,26 +114,27 @@ Rendre l’application accessible depuis l’extérieur.
 kubectl expose deployment kubernetes-bootcamp --type="NodePort" --port=8080
 
 ```
+![Services](images/exit31.jpeg)
 3.2 Get Services
 ```bash
 kubectl get services
 
 ```
 
-![Services](images/services.png)
+![Services](images/32.jpeg)
 3.3 Get Minikube IP
 ```bash
 minikube ip
 
 ```
-![Minikube IP](images/minikube_ip.png)
+![Services](images/32(2).jpeg)
 3.4 Access Application
  Explication
 
 Accéder via navigateur :
 
 http://<MINIKUBE_IP>:<NODE_PORT>
-![Web app](images/web_app.png)
+![Web app](images/34.jpeg)
 
 4️- Scale Deployment
  Objectif
@@ -139,7 +146,7 @@ Gérer le nombre de pods.
 kubectl scale deployments/kubernetes-bootcamp --replicas=5
 
 ```
-![5 pods](images/scale_5.png)
+![5 pods](images/41-verifpodetat.jpeg)
  Question
 
 Which command did you use?
@@ -160,9 +167,9 @@ What is happening? Why?
 kubectl scale deployments/kubernetes-bootcamp --replicas=2
 
 ```
-📸 Screenshot
-![2 pods](images/scale_2.png)
 
+![2 pods](images/43.jpeg)
+![2 pods](images/44red.jpeg)
 5️-  Update and Rollback
  Objectif
 
@@ -174,7 +181,7 @@ kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=jocatalin/
 ```
 
  Screenshot
-![Version v2](images/v2.png)
+![Version v2](images/51.jpeg)
 Question
 
 What happened?
@@ -202,7 +209,8 @@ kubectl rollout undo deployments/kubernetes-bootcamp
 ```
 
 
-![Rollback](images/rollback.png)
+![Rollback](images/53.jpeg)
+![Rollback](images/54V3.jpeg)
 6️- Deployment with YAML
  Objectif
 
