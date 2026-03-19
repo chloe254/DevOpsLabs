@@ -73,8 +73,6 @@ Accéder au shell du conteneur.
 kubectl exec -ti $POD_NAME -- bash
 ```
 
-
-![Shell in pod](images/shell_pod.png)--
 2.6 Find server.js
  Explication
 
@@ -96,7 +94,7 @@ Tester l’application avec curl.
 curl localhost:<PORT>
 
 ```
-![curl result](images/curl_inside.png)
+
  Question
 
 Are you able to query the web app outside of the pod?
@@ -151,11 +149,9 @@ kubectl scale deployments/kubernetes-bootcamp --replicas=5
 
 Which command did you use?
 
-Réponse :
-(à compléter)
+Cette commande dit à Kubernetes : “Je veux 5 pods pour ce déploiement”. kubectl get pods est celle qui permet de vérifier le nombre de pods et leur état.
 
 4.2 Refresh Behaviour
- Question
 
 What is happening? Why?
 
@@ -176,11 +172,7 @@ kubectl scale deployments/kubernetes-bootcamp --replicas=2
 Mettre à jour l’application et comprendre le rollback.
 
 5.1 Update v2
-Observation dans le navigateur :
 
-Si tu rafraîchis avec CTRL+F5 pendant le déploiement, certaines pages peuvent s’afficher avec l’ancienne version et d’autres avec la nouvelle.
-
-Pourquoi ? → Kubernetes met à jour les pods progressivement (rolling update). Les anciens pods répondent encore jusqu’à ce que les nouveaux soient prêts.
 ```bash
 kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=jocatalin/kubernetes-bootcamp:v2
 ```
@@ -190,9 +182,11 @@ kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=jocatalin/
 Question
 
 What happened?
+Observation dans le navigateur :
 
- Réponse :
-(à compléter)
+Si tu rafraîchis avec CTRL+F5 pendant le déploiement, certaines pages peuvent s’afficher avec l’ancienne version et d’autres avec la nouvelle.
+
+Pourquoi ? → Kubernetes met à jour les pods progressivement (rolling update). Les anciens pods répondent encore jusqu’à ce que les nouveaux soient prêts.
 
 5.2 Update v3
 ```bash
@@ -200,7 +194,6 @@ kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=jocatalin/
 ```
 
 
-![Version v3](images/v3.png)
  Question
 
 What is happening?
@@ -237,8 +230,7 @@ kubectl apply -f deployment.yaml
 
 Are the pods running?
 
- Réponse :
-(à compléter)
+ Oui 
 
 6.2 Apply Service
 ```bash
@@ -251,8 +243,7 @@ kubectl apply -f service.yaml
 
 Can you access the service?
 
- Réponse :
-(à compléter)
+Oui
 
 6.3 Scale to 3 Replicas
 ```bash
@@ -260,15 +251,15 @@ kubectl apply -f deployment.yaml
 ```
 ![3 pods](images/63.jpeg)
 ![3 pods](images/64.jpeg)
-
+![3 pods](images/65.jpeg)
+![3 pods](images/66.jpeg)
+![3 pods](images/67.jpeg)
 
  Question
 
 Are you hitting different replicas?
 
- Réponse :
-(à compléter)
-
+ Oui 
  Cleanup
 ```bash
 kubectl delete service kubernetes-bootcamp
