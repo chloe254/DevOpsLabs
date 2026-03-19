@@ -1,7 +1,9 @@
  Lab – Container Orchestration with Kubernetes
 
 
-Nom : 
+Nom : Clara Chalayer 
+Edouard Menut
+Chloe Lestic 
 
 1️- Install Minikube
  Objectif
@@ -19,9 +21,10 @@ minikube status
 
 2️- Learn to use kubectl commands
  Objectif
+
 Créer et manipuler un pod Kubernetes.
 
-2.1 Create Deployment
+2.2 Create Deployment
 
 
 Créer un deployment contenant un pod avec une application Node.js.
@@ -34,7 +37,8 @@ kubectl create deployment kubernetes-bootcamp --image=gcr.io/google-samples/kube
 Utilisation des commandes de base : 
 
 ![Commandes ](images/appUseCommandesBase.jpeg)
-2.2 List Pods
+
+2.3 List Pods
 Explication
 Vérifier que le pod est bien lancé.
 
@@ -43,7 +47,8 @@ kubectl get pods
 
 ```
 ![Pods running](images/verif.jpeg)
-2.3 Logs
+
+2.4 Logs
  Explication
 
 Afficher les logs du pod.
@@ -54,7 +59,8 @@ kubectl logs $POD_NAME
 
 
 ![Pod logs](images/affLogPods.jpeg) 
-2.4 Execute Command in Pod
+
+2.5 Execute Command in Pod
 Explication
 
 Voir les informations système du conteneur.
@@ -63,8 +69,9 @@ Voir les informations système du conteneur.
 kubectl exec $POD_NAME -- cat /etc/os-release
 ```
 
-![OS info](images/openJS.jpeg)--
-2.5 Open Shell
+![OS info](images/openJS.jpeg)
+
+2.6 Open Shell
  Explication
 
 Accéder au shell du conteneur.
@@ -73,8 +80,8 @@ Accéder au shell du conteneur.
 kubectl exec -ti $POD_NAME -- bash
 ```
 
-2.6 Find server.js
- Explication
+2.7 Find server.js
+ 
 
 Trouver le fichier server.js pour connaître le port utilisé.
 
@@ -85,8 +92,8 @@ find / -name "server.js" 2>/dev/null
 ```
 
 ![server.js](images/deploiAvecNodeJs.jpeg)
-2.7 Test App Inside Pod
- Explication
+
+2.8 Test App Inside Pod
 
 Tester l’application avec curl.
 
@@ -94,40 +101,43 @@ Tester l’application avec curl.
 curl localhost:<PORT>
 
 ```
+![localhost](images/deploiAvecNodeJs.jpeg)
 
- Question
+ 2.9 Are you able to query the web app outside of the pod?
 
-Are you able to query the web app outside of the pod?
-
- Réponse :
-(à compléter)
+Oui il est possible d'interroger l'application web depuis l'exterieur du pod, a condition qu'elle soit correctement exposée. 
 
 3️- Expose Kubernetes Service
- Objectif
+ 
 
 Rendre l’application accessible depuis l’extérieur.
 
 3.1 Expose Deployment
+
 ```bash
 kubectl expose deployment kubernetes-bootcamp --type="NodePort" --port=8080
 
 ```
-![Services](images/exit31.jpeg)
+![expose deployment](images/exit31.jpeg)
+
 3.2 Get Services
+
 ```bash
 kubectl get services
 
 ```
 
 ![Services](images/32.jpeg)
+
 3.3 Get Minikube IP
 ```bash
 minikube ip
 
 ```
-![Services](images/32(2).jpeg)
+![minikube IP](images/32(2).jpeg)
+
 3.4 Access Application
- Explication
+ 
 
 Accéder via navigateur :
 
@@ -135,7 +145,6 @@ http://<MINIKUBE_IP>:<NODE_PORT>
 ![Web app](images/34.jpeg)
 
 4️- Scale Deployment
- Objectif
 
 Gérer le nombre de pods.
 
@@ -144,87 +153,95 @@ Gérer le nombre de pods.
 kubectl scale deployments/kubernetes-bootcamp --replicas=5
 
 ```
-![5 pods](images/41-verifpodetat.jpeg)
- Question
+![scale up](images/41.jpeg)
 
-Which command did you use?
+
+4.2 Which command did you use?
 
 Cette commande dit à Kubernetes : “Je veux 5 pods pour ce déploiement”. kubectl get pods est celle qui permet de vérifier le nombre de pods et leur état.
 
-4.2 Refresh Behaviour
+![4.2](images/41-verifpodetat.jpeg)
 
-What is happening? Why?
+4.3 What is happening? Why?
 
- Réponse :
-(à compléter)
+Quand on rafraîchit la page plusieurs fois, la réponse change. L’application est maintenant exécutée sur plusieurs pods (5 pods après le scale up). À chaque rafraîchissement, la requête est envoyée vers un pod différent.
 
-4.3 Scale Down
+Cela se produit parce que le Service Kubernetes utilise un load balancing : il répartit automatiquement les requêtes entre tous les pods du déploiement. 
+
+
 ```bash
 kubectl scale deployments/kubernetes-bootcamp --replicas=2
 
 ```
 
-![2 pods](images/43.jpeg)
-![2 pods](images/44red.jpeg)
+![scaledeploy](images/43.jpeg)
+
+4.4 Scale Down
+
+![red points](images/44red.jpeg)
+
 5️-  Update and Rollback
- Objectif
+ 
 
 Mettre à jour l’application et comprendre le rollback.
 
-5.1 Update v2
+5.1/2 Update v2
 
 ```bash
 kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=jocatalin/kubernetes-bootcamp:v2
 ```
 
- Screenshot
 ![Version v2](images/51.jpeg)
-Question
 
-What happened?
-Observation dans le navigateur :
 
-Si tu rafraîchis avec CTRL+F5 pendant le déploiement, certaines pages peuvent s’afficher avec l’ancienne version et d’autres avec la nouvelle.
+5.3 What happened?
 
-Pourquoi ? → Kubernetes met à jour les pods progressivement (rolling update). Les anciens pods répondent encore jusqu’à ce que les nouveaux soient prêts.
 
-5.2 Update v3
+Si on rafraîchis avec CTRL+F5 pendant le déploiement, certaines pages peuvent s’afficher avec l’ancienne version et d’autres avec la nouvelle.
+
+Car Kubernetes met à jour les pods progressivement (rolling update). Les anciens pods répondent encore jusqu’à ce que les nouveaux soient prêts.
+
+![rolling update](images/53.jpeg)
+
+5.4 Update v3
 ```bash
 kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=jocatalin/kubernetes-bootcamp:v3
 kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=jocatalin/kubernetes-bootcamp:v3
 kubectl get pods
 ```
+![version v3](images/54V3.jpeg)
 
 
- List all of the running pods, what is happening here?
- The new pods are failing to start.
-We can see errors such as ErrImagePull and ImagePullBackOff.
+ 5.5 List all of the running pods, what is happening here?
 
-This means Kubernetes is unable to download the Docker image (invalid or unavailable image).
+Les nouveaux pods n’arrivent pas à démarrer.
+On peut voir des erreurs comme ErrImagePull et ImagePullBackOff.
+Cela signifie que Kubernetes n’arrive pas à télécharger l’image Docker (image invalide ou indisponible).
 
-5.3 Rollback
+![55](images/55.jpeg)
+
+5.6 Rollout 
 ```bash
 kubectl rollout undo deployments/kubernetes-bootcamp
 ```
+![Rollout](images/56.jpeg)
 
+5.7 Rollback 
 
-![Rollback](images/53.jpeg)
 ```bash
 kubectl rollout status deployment/kubernetes-bootcamp
 kubectl get pods
 ```
 Roll back the service to the image we first chose in part 2 of the lab.
-The rollback restores the previous working version of the application (v2).
-All pods return to a stable Running state and the application becomes accessible again.
 
-![Rollback](images/54V3.jpeg)
-![Rollback](images/55.jpeg)
-![Rollback](images/56.jpeg)
+Le rollback restaure la version précédente fonctionnelle de l’application (v2).
+Tous les pods reviennent à un état stable Running et l’application redevient accessible.
+
+
 ![Rollback](images/57.jpeg)
 
 
 6️- Deployment with YAML
- Objectif
 
 Déployer avec des fichiers YAML.
 
@@ -233,9 +250,7 @@ Déployer avec des fichiers YAML.
 kubectl apply -f deployment.yaml
 ```
 
-
 ![Pods YAML](images/61.jpeg)
- Question
 
 Are the pods running?
 
@@ -246,38 +261,61 @@ Are the pods running?
 kubectl apply -f service.yaml
 ```
 
-
 ![Service YAML](images/62.jpeg)
- Question
-
-Can you access the service?
-
-Yes, the service is accessible through the browser using the Minikube URL.
 
 6.3 Scale to 3 Replicas
 ```bash
 kubectl apply -f service.yaml
-kubectl get services
-minikube service kubernetes-bootcamp
-```
-![3 pods](images/63.jpeg)
-![3 pods](images/64.jpeg)
-![3 pods](images/65.jpeg)
-![3 pods](images/66.jpeg)
-![3 pods](images/67.jpeg)
 
- Question
+```
+![service yaml ](images/63.jpeg)
+
+6.4 
+
+![3 pods](images/64.jpeg)
+
+6.5 Can you access the service?
+
+Oui, le service est accessible via le navigateur en utilisant l’URL fournie par Minikube.
+
+
+![65](images/65.jpeg)
+
+6.6 Modification du code service 
+
+![66](images/662.jpeg)
+
+6.7
+
+![67](images/67.jpeg)
+
+
+
+
 
 Are you hitting different replicas?
 
- Yes. By refreshing the browser multiple times, the hostname changes.
-This shows that requests are being distributed across different replicas (load balancing).
+Oui. En rafraîchissant le navigateur plusieurs fois, le nom d’hôte change.
+Cela montre que les requêtes sont réparties entre différentes réplicas (répartition de charge).
 
 
  Cleanup
+
 ```bash
 kubectl delete service kubernetes-bootcamp
+```
+
+![stop](images/clean3.jpeg)
+
+```bash
 kubectl delete deployment kubernetes-bootcamp
+```
+
+![stop](images/clean2.jpeg)
+
+```bash
+
 minikube stop
 ```
 
+![stop](images/clean1.jpeg)
