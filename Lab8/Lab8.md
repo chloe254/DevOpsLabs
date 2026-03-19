@@ -69,7 +69,8 @@ Voir les informations système du conteneur.
 kubectl exec $POD_NAME -- cat /etc/os-release
 ```
 
-![OS info](images/openJS.jpeg)--
+![OS info](images/openJS.jpeg)
+
 2.6 Open Shell
  Explication
 
@@ -268,7 +269,9 @@ kubectl apply -f service.yaml
 
 ```
 ![service yaml ](images/63.jpeg)
+
 6.4 
+
 ![3 pods](images/64.jpeg)
 
 6.5 Can you access the service?
