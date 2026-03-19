@@ -160,6 +160,7 @@ kubectl scale deployments/kubernetes-bootcamp --replicas=5
 Cette commande dit à Kubernetes : “Je veux 5 pods pour ce déploiement”. kubectl get pods est celle qui permet de vérifier le nombre de pods et leur état.
 
 ![4.2](images/41-verifpodetat.jpeg)
+
 4.3 What is happening? Why?
 
 Quand on rafraîchit la page plusieurs fois, la réponse change. L’application est maintenant exécutée sur plusieurs pods (5 pods après le scale up). À chaque rafraîchissement, la requête est envoyée vers un pod différent.
@@ -173,6 +174,7 @@ kubectl scale deployments/kubernetes-bootcamp --replicas=2
 ```
 
 ![scaledeploy](images/43.jpeg)
+
 4.4 Scale Down
 
 ![red points](images/44red.jpeg)
@@ -199,6 +201,7 @@ Si on rafraîchis avec CTRL+F5 pendant le déploiement, certaines pages peuvent 
 Car Kubernetes met à jour les pods progressivement (rolling update). Les anciens pods répondent encore jusqu’à ce que les nouveaux soient prêts.
 
 ![rolling update](images/53.jpeg)
+
 5.4 Update v3
 ```bash
 kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=jocatalin/kubernetes-bootcamp:v3
@@ -294,9 +297,22 @@ Cela montre que les requêtes sont réparties entre différentes réplicas (rép
 
 
  Cleanup
+
 ```bash
 kubectl delete service kubernetes-bootcamp
+```
+
+![stop](images/clean3.jpeg)
+
+```bash
 kubectl delete deployment kubernetes-bootcamp
+```
+
+![stop](images/clean2.jpeg)
+
+```bash
+
 minikube stop
 ```
 
+![stop](images/clean1.jpeg)
