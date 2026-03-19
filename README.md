@@ -336,3 +336,127 @@ Pour résoudre ce problème, nous avons ajouté un Docker Volume monté sur le d
 -persistance des données mise en place avec un volume Docker.
 
 Le lab est entièrement terminé.
+
+Lab 9 – Kubernetes Storage
+1. Contexte et objectif du lab
+
+Ce lab avait pour objectif de découvrir les principaux mécanismes de stockage dans Kubernetes à travers trois types de volumes :
+
+-emptyDir
+-hostPath
+-PersistentVolume avec PersistentVolumeClaim
+
+L’objectif principal était de comprendre comment Kubernetes gère le stockage des données dans un Pod, de distinguer le stockage temporaire du stockage persistant, et de savoir monter un volume dans un conteneur nginx afin de rendre un fichier index.html accessible via le serveur web.
+
+2. Application dans un contexte réel d’entreprise
+
+Dans un contexte professionnel, la gestion du stockage dans Kubernetes est essentielle pour déployer des applications robustes et persistantes.
+
+Cela permet notamment :
+
+-de stocker temporairement des données utilisées par un Pod pendant son exécution,
+-de partager des fichiers entre plusieurs conteneurs d’un même Pod,
+-de conserver les données même après la suppression ou le redémarrage d’un conteneur,
+-de connecter les applications à un espace de stockage durable,
+-de séparer le cycle de vie des données du cycle de vie des Pods.
+
+En entreprise, ces mécanismes sont utilisés pour des applications web, des bases de données, des systèmes de logs, des volumes de configuration ou encore des traitements nécessitant de conserver des fichiers entre plusieurs déploiements.
+
+3. Difficultés rencontrées et solutions
+
+Problème 1 : utilisation du mauvais Pod pour les tests
+
+Difficulté :
+Lors du test avec la commande curl localhost, une erreur Connection refused est apparue. Cela venait du fait que la commande avait été exécutée dans un Pod kubernetes-bootcamp, qui n’était pas le Pod nginx du lab.
+
+Solution :
+Nous avons listé les Pods avec kubectl get pods, puis identifié le bon Pod créé par le fichier deployment.yml, de type nginx-emptydir ou nginx-hostpath.
+En entrant dans le bon conteneur avec kubectl exec -it <POD_NAME> -- sh, le test a pu être réalisé correctement.
+
+Problème 2 : compréhension du fonctionnement du dossier monté dans nginx
+
+Difficulté :
+Au départ, nginx retournait une erreur 403 Forbidden, ce qui pouvait laisser penser à une mauvaise configuration.
+
+Solution :
+Nous avons compris que nginx servait les fichiers présents dans le dossier /usr/share/nginx/html, et que ce dossier était vide tant qu’aucun fichier index.html n’avait été créé.
+Après ajout du fichier avec :
+
+-echo 'Hello from Kubernetes storage!' > /usr/share/nginx/html/index.html
+
+nginx a répondu correctement.
+
+Problème 3 : écriture dans le volume hostPath
+
+Difficulté :
+Dans la partie hostPath, le contenu n’apparaissait pas immédiatement dans le conteneur, car le fichier devait être créé directement sur le système de fichiers de la VM Minikube et non dans le conteneur lui-même.
+
+Solution :
+Nous avons utilisé minikube ssh pour entrer dans la VM, puis créé le dossier et le fichier :
+
+-sudo mkdir -p /mnt/hostPath
+-sudo chmod -R 777 /mnt/hostPath
+-echo 'Hello from Kubernetes storage!' | sudo tee /mnt/hostPath/index.html
+
+Ensuite, le contenu a bien été visible depuis le Pod nginx.
+
+Problème 4 : compréhension de la persistance entre emptyDir, hostPath et PersistentVolume
+
+Difficulté :
+Il fallait bien distinguer le comportement de chaque type de stockage après suppression d’un Pod.
+
+Solution :
+Les tests réalisés ont permis de comprendre que :
+
+-emptyDir supprime les données à la suppression du Pod,
+-hostPath conserve les données sur le nœud Minikube,
+-PersistentVolume permet une gestion plus propre et plus durable du stockage via Kubernetes.
+
+4. Étapes de réalisation du lab
+Étape 1 : utilisation de emptyDir
+
+-complétion du fichier lab/emptyDir/deployment.yml,
+-création d’un déploiement nginx avec montage du volume sur /usr/share/nginx/html,
+-application de la configuration avec kubectl apply -f,
+-vérification du Pod avec kubectl get pods,
+-connexion au conteneur avec kubectl exec,
+-test avec curl localhost,
+-création du fichier index.html dans le volume,
+-vérification de l’affichage du message dans nginx,
+-constat que les données sont perdues après suppression du Pod.
+
+Étape 2 : utilisation de hostPath
+
+-complétion du fichier lab/hostPath/deployment.yml,
+-création d’un déploiement nginx utilisant un dossier du nœud Minikube,
+-application de la configuration,
+-test du comportement initial avec curl localhost,
+-connexion à la VM Minikube avec minikube ssh,
+-création du dossier /mnt/hostPath et du fichier index.html,
+-retour dans le conteneur pour tester l’affichage,
+-vérification que les données restent présentes même après suppression du Pod.
+
+Étape 3 : utilisation de PersistentVolume
+
+-création du fichier pv-volume.yaml,
+-création d’un PersistentVolume,
+-création du fichier pv-claim.yaml,
+-création d’un PersistentVolumeClaim,
+-vérification que le PVC passe à l’état Bound,
+-création du fichier pv-pod.yaml,
+-création d’un Pod nginx utilisant le PVC,
+-ajout d’un fichier index.html dans le volume monté,
+-test avec curl localhost,
+-validation du fonctionnement du stockage persistant géré par Kubernetes.
+
+5. État d’avancement
+
+-Minikube installé et démarré correctement,
+-déploiement avec emptyDir fonctionnel,
+-déploiement avec hostPath fonctionnel,
+-création et utilisation d’un PersistentVolume réussies,
+-compréhension des différences entre stockage temporaire et persistant,
+-tests réalisés avec nginx et fichier index.html,
+-comportement de chaque type de volume vérifié.
+
+Le lab est entièrement terminé. 
