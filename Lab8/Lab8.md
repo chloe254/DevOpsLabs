@@ -191,15 +191,16 @@ Pourquoi ? → Kubernetes met à jour les pods progressivement (rolling update
 5.2 Update v3
 ```bash
 kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=jocatalin/kubernetes-bootcamp:v3
+kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=jocatalin/kubernetes-bootcamp:v3
+kubectl get pods
 ```
 
 
- Question
+ List all of the running pods, what is happening here?
+ The new pods are failing to start.
+We can see errors such as ErrImagePull and ImagePullBackOff.
 
-What is happening?
-
- Réponse :
-(à compléter)
+This means Kubernetes is unable to download the Docker image (invalid or unavailable image).
 
 5.3 Rollback
 ```bash
@@ -208,6 +209,14 @@ kubectl rollout undo deployments/kubernetes-bootcamp
 
 
 ![Rollback](images/53.jpeg)
+```bash
+kubectl rollout status deployment/kubernetes-bootcamp
+kubectl get pods
+```
+Roll back the service to the image we first chose in part 2 of the lab.
+The rollback restores the previous working version of the application (v2).
+All pods return to a stable Running state and the application becomes accessible again.
+
 ![Rollback](images/54V3.jpeg)
 ![Rollback](images/55.jpeg)
 ![Rollback](images/56.jpeg)
@@ -230,7 +239,7 @@ kubectl apply -f deployment.yaml
 
 Are the pods running?
 
- Oui 
+ Oui avec succès
 
 6.2 Apply Service
 ```bash
@@ -243,11 +252,13 @@ kubectl apply -f service.yaml
 
 Can you access the service?
 
-Oui
+Yes, the service is accessible through the browser using the Minikube URL.
 
 6.3 Scale to 3 Replicas
 ```bash
-kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+kubectl get services
+minikube service kubernetes-bootcamp
 ```
 ![3 pods](images/63.jpeg)
 ![3 pods](images/64.jpeg)
@@ -259,7 +270,10 @@ kubectl apply -f deployment.yaml
 
 Are you hitting different replicas?
 
- Oui 
+ Yes. By refreshing the browser multiple times, the hostname changes.
+This shows that requests are being distributed across different replicas (load balancing).
+
+
  Cleanup
 ```bash
 kubectl delete service kubernetes-bootcamp
