@@ -16,10 +16,11 @@
         state: present
 
     - name: Install app dependencies
-      npm:
-        path: /home/vagrant/webapp
+      command: npm install
+      args:
+        chdir: /home/vagrant/webapp
 
     - name: Start the application
-      shell: node /home/vagrant/webapp/src/server.js &
+      shell: nohup node /home/vagrant/webapp/src/server.js > /home/vagrant/webapp/app.log 2>&1 &
       args:
         chdir: /home/vagrant/webapp
