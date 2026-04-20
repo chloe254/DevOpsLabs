@@ -1,0 +1,25 @@
+---
+- name: Provision webapp
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install Node.js and npm
+      apt:
+        name:
+          - nodejs
+          - npm
+        state: present
+
+    - name: Install app dependencies
+      npm:
+        path: /home/vagrant/webapp
+
+    - name: Start the application
+      shell: node /home/vagrant/webapp/src/server.js &
+      args:
+        chdir: /home/vagrant/webapp
