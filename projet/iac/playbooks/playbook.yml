@@ -8,19 +8,28 @@
       apt:
         update_cache: yes
 
-    - name: Install Node.js and npm
-      apt:
-        name:
-          - nodejs
-          - npm
-        state: present
+    - name: Install Node.js 18
+      shell: |
+        curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+        apt-get install -y nodejs
+
+    - name: Copy app into VM
+      copy:
+        src: /home/vagrant/webapp/
+        dest: /home/vagrant/app/
+        remote_src: yes
+
+    - name: Remove old node_modules
+      file:
+        path: /home/vagrant/app/node_modules
+        state: absent
 
     - name: Install app dependencies
       command: npm install
       args:
-        chdir: /home/vagrant/webapp
+        chdir: /home/vagrant/app
 
     - name: Start the application
-      shell: nohup node /home/vagrant/webapp/src/server.js > /home/vagrant/webapp/app.log 2>&1 &
+      shell: nohup node /home/vagrant/app/src/server.js > /home/vagrant/app/app.log 2>&1 &
       args:
-        chdir: /home/vagrant/webapp
+        chdir: /home/vagrant/app
