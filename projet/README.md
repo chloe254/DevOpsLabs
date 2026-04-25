@@ -50,7 +50,7 @@ Expected result:
 - the browser correctly displays the CV
 
 > ![image](images/2.jpeg)
-> ![image](images/2.jpeg)
+
 ---
 
 ### Health Check Endpoint
@@ -174,6 +174,9 @@ The pipeline should run without errors and display a green status.
 We created a Linux virtual machine using Vagrant with VirtualBox.
 This VM allows reproducing an identical deployment environment for all project members.
 
+> ![image](images/E6.jpeg)
+> ![image](images/E7.jpeg)
+
 ### Configuration
 
 - Box: `ubuntu/focal64`
@@ -204,7 +207,7 @@ vagrant status
 The VM starts correctly and the webapp folder is accessible from the VM.
 
 > ![image](images/E4.jpeg)
-> ![image](images/E5.jpeg)
+
 
 ---
 
@@ -239,8 +242,9 @@ Expected results:
 - `/` : displays the CV HTML
 - `/health` : returns `{"status":"ok"}`
 
->  ![image](images/E6.jpeg)
- > ![image](images/E7.jpeg)µ
+> ![image](images/E5.jpeg)
+
+
  >  ![image](images/E8.jpeg)
 ---
 
@@ -261,7 +265,7 @@ cd projet/webapp
 docker build -t myapp .
 ```
 
->  ![image](images/E71.jpeg)
+>  ![image](images/E71.jpg)
 
 ### Run the Container
 
@@ -275,7 +279,7 @@ The application is then accessible at:
 http://localhost:3000
 ```
 
->  ![image](images/72.jpeg)
+>  ![image](images/72.jpg)
 
 ### Docker Hub
 
@@ -292,7 +296,7 @@ docker pull chloelstc/myapp:latest
 docker run -p 3000:3000 chloelstc/myapp:latest
 ```
 
->  ![image](images/73.jpeg)
+>  ![image](images/73.jpg)
 
 ---
 
@@ -313,8 +317,8 @@ We deployed the application on a local Kubernetes cluster using Minikube.
 ```bash
 minikube start --driver=docker
 ```
- > ![image](images/81.jpeg)
- >  ![image](images/82.jpeg)
+ > ![image](images/81.jpg)
+ >  ![image](images/82.jpg)
 
 ### Manifest Files
 
@@ -328,7 +332,7 @@ The Kubernetes manifests are located in the `k8s/` folder:
 kubectl apply -f k8s/deployment.yaml
 kubectl apply -f k8s/service.yaml
 ```
- > ![image](images/92.jpeg)
+ > ![image](images/92.jpg)
 
 ### Verify the Deployment
 
@@ -336,7 +340,7 @@ kubectl apply -f k8s/service.yaml
 kubectl get pods
 kubectl get services
 ```
->  ![image](images/91.jpeg)
+>  ![image](images/91.jpg)
 
 
 ### Access the Application
@@ -347,8 +351,8 @@ minikube service myapp-service
 
 This command opens the application automatically in your browser.
 
->  ![image](images/93.jpeg)
->  ![image](images/94.jpeg)
+>  ![image](images/93.jpg)
+>  ![image](images/94.jpg)
 
 ---
 
@@ -392,4 +396,3 @@ The `minikube` and `kubectl` commands were not recognized in the VS Code integra
 
 ---
 
-*ECE Paris — DevOps Project — 2024/2025*
