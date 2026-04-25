@@ -49,7 +49,7 @@ When accessing the main page (`/`), the CV is displayed as an image.
 Expected result:
 - the browser correctly displays the CV
 
->  ![image](images/2.jpeg)
+> ![image](images/2.jpeg)
 
 ---
 
@@ -190,7 +190,7 @@ cd projet/iac
 vagrant up
 ```
  > ![image](images/E3.jpeg)
- 
+
 ### Verification
 
 To verify that the VM is running:
