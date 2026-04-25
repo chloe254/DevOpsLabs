@@ -265,7 +265,8 @@ cd projet/webapp
 docker build -t myapp .
 ```
 
->  ![image](images/E71.jpg)
+
+> ![image](images/71.jpg)
 
 ### Run the Container
 
