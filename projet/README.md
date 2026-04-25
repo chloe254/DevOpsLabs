@@ -34,7 +34,7 @@ cd projet/webapp
 node src/server.js
 ```
 
-> ![image](image/1.jpg)
+> ![image](images/1.jpeg)
 
 Once launched, the server is accessible at:
 
