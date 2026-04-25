@@ -49,7 +49,7 @@ When accessing the main page (`/`), the CV is displayed as an image.
 Expected result:
 - the browser correctly displays the CV
 
->  ![image](image/2.jpeg)
+>  ![image](images/2.jpeg)
 
 ---
 
@@ -71,7 +71,7 @@ Expected result:
 
 This allows verifying that the server is running correctly.
 
->  ![image](image/3.jpeg)
+>  ![image](images/3.jpeg)
 
 ---
 
@@ -106,7 +106,7 @@ Expected result:
 PASS test/app.test.js
 ```
 
->  ![image](image/4.jpeg)
+>  ![image](images/4.jpeg)
 
 ---
 
@@ -131,7 +131,7 @@ Description of folders:
 - `src/` : contains the application source code
 - `test/` : contains automated tests
 
->  ![image](image/5.jpeg)
+>  ![image](images/5.jpeg)
 
 ---
 
@@ -163,7 +163,7 @@ The pipeline is defined in `.github/workflows/main.yml`.
 
 The pipeline should run without errors and display a green status.
 
-> **photo_ci_cd**
+> ![image](images/E1.jpeg)
 
 ---
 
@@ -189,7 +189,8 @@ To start the VM:
 cd projet/iac
 vagrant up
 ```
-
+ > ![image](images/E3.jpeg)
+ 
 ### Verification
 
 To verify that the VM is running:
@@ -202,7 +203,8 @@ vagrant status
 
 The VM starts correctly and the webapp folder is accessible from the VM.
 
-> **photo_vagrant_up**
+> ![image](images/E4.jpeg)
+> ![image](images/E5.jpeg)
 
 ---
 
@@ -237,8 +239,9 @@ Expected results:
 - `/` : displays the CV HTML
 - `/health` : returns `{"status":"ok"}`
 
-> **photo_ansible**
-
+>  ![image](images/E6.jpeg)
+ > ![image](images/E7.jpeg)µ
+ >  ![image](images/E8.jpeg)
 ---
 
 ## 7. Docker
@@ -258,7 +261,7 @@ cd projet/webapp
 docker build -t myapp .
 ```
 
-> **photo_docker_build**
+>  ![image](images/E71.jpeg)
 
 ### Run the Container
 
@@ -272,7 +275,7 @@ The application is then accessible at:
 http://localhost:3000
 ```
 
-> **photo_docker_run**
+>  ![image](images/72.jpeg)
 
 ### Docker Hub
 
@@ -285,11 +288,11 @@ https://hub.docker.com/r/TON_USERNAME/myapp
 To pull and run the image directly:
 
 ```bash
-docker pull TON_USERNAME/myapp:latest
-docker run -p 3000:3000 TON_USERNAME/myapp:latest
+docker pull chloelstc/myapp:latest
+docker run -p 3000:3000 chloelstc/myapp:latest
 ```
 
-> **photo_dockerhub**
+>  ![image](images/73.jpeg)
 
 ---
 
@@ -310,6 +313,8 @@ We deployed the application on a local Kubernetes cluster using Minikube.
 ```bash
 minikube start --driver=docker
 ```
+ > ![image](images/81.jpeg)
+ >  ![image](images/82.jpeg)
 
 ### Manifest Files
 
@@ -323,6 +328,7 @@ The Kubernetes manifests are located in the `k8s/` folder:
 kubectl apply -f k8s/deployment.yaml
 kubectl apply -f k8s/service.yaml
 ```
+ > ![image](images/92.jpeg)
 
 ### Verify the Deployment
 
@@ -330,25 +336,8 @@ kubectl apply -f k8s/service.yaml
 kubectl get pods
 kubectl get services
 ```
+>  ![image](images/91.jpeg)
 
-Expected result — pods:
-
-```
-NAME                                READY   STATUS    RESTARTS   AGE
-myapp-deployment-XXXXXXXXX-XXXXX    1/1     Running   0          Xs
-myapp-deployment-XXXXXXXXX-XXXXX    1/1     Running   0          Xs
-```
-
-Expected result — services:
-
-```
-NAME             TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
-myapp-service    NodePort   10.X.X.X       <none>        3000:30000/TCP   Xs
-```
-
-> **photo_kubectl_pods**
-
-> **photo_kubectl_services**
 
 ### Access the Application
 
@@ -358,7 +347,8 @@ minikube service myapp-service
 
 This command opens the application automatically in your browser.
 
-> **photo_app_k8s**
+>  ![image](images/93.jpeg)
+>  ![image](images/94.jpeg)
 
 ---
 
