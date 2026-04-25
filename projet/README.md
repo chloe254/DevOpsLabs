@@ -50,7 +50,7 @@ Expected result:
 - the browser correctly displays the CV
 
 > ![image](images/2.jpeg)
-
+> ![image](images/2.jpeg)
 ---
 
 ### Health Check Endpoint
