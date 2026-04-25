@@ -100,7 +100,6 @@ npm test
 
 Tests should run without errors and display a positive result.
 
-Expected result:
 
 ```
 PASS test/app.test.js
@@ -349,7 +348,7 @@ kubectl get services
 minikube service myapp-service
 ```
 
-This command opens the application automatically in your browser.
+This command opens the application automatically in my browser.
 
 >  ![image](images/93.jpg)
 >  ![image](images/94.jpg)
