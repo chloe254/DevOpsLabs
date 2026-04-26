@@ -1,33 +1,33 @@
 # Projet DevOps
 
-## Table of Contents
-1. [Web Application](#1-web-application)
-2. [Automated Tests](#2-automated-tests)
-3. [Project Structure](#3-project-structure)
-4. [CI/CD Pipeline](#4-cicd-pipeline)
+## Table des matières
+1. [Application Web](#1-application-web)
+2. [Tests Automatisés](#2-tests-automatisés)
+3. [Structure du Projet](#3-structure-du-projet)
+4. [Pipeline CI/CD](#4-pipeline-cicd)
 5. [Vagrant](#5-vagrant)
 6. [Ansible](#6-ansible)
 7. [Docker](#7-docker)
 8. [Kubernetes](#8-kubernetes)
-9. [Difficulties Encountered](#9-difficulties-encountered)
-10. [Authors](#10-authors)
+9. [Difficultés Rencontrées](#9-difficultés-rencontrées)
+10. [Auteurs](#10-auteurs)
 
 ---
 
-## 1. Web Application
+## 1. Application Web
 
 ### Description
 
-We developed a simple web application using Node.js and the Express framework.
-This application allows:
-- displaying a CV as an image
-- verifying that the application is running correctly through a health check endpoint
+Nous avons développé une application web simple avec Node.js et le framework Express.
+Cette application permet de :
+- afficher un CV sous forme d'image
+- vérifier que l'application fonctionne correctement via un endpoint de health check
 
 ---
 
-### Running the Application
+### Lancement de l'Application
 
-To run the application locally:
+Pour démarrer l'application en local :
 
 ```bash
 cd projet/webapp
@@ -36,59 +36,59 @@ node src/server.js
 
 > ![image](images/1.jpeg)
 
-Once launched, the server is accessible at:
+Une fois lancé, le serveur est accessible à l'adresse :
 
 ```
 http://localhost:3000
 ```
 
-### Application Result
+### Résultat
 
-When accessing the main page (`/`), the CV is displayed as an image.
+En accédant à la page principale (`/`), le CV s'affiche sous forme d'image.
 
-Expected result:
-- the browser correctly displays the CV
+Résultat attendu :
+- le navigateur affiche correctement le CV
 
 > ![image](images/2.jpeg)
 
 ---
 
-### Health Check Endpoint
+### Endpoint de Health Check
 
-The application provides a `/health` endpoint to verify it is working correctly.
+L'application expose un endpoint `/health` pour vérifier son bon fonctionnement.
 
-URL:
+URL :
 
 ```
 http://localhost:3000/health
 ```
 
-Expected result:
+Résultat attendu :
 
 ```json
 {"status":"OK"}
 ```
 
-This allows verifying that the server is running correctly.
+Cela permet de confirmer que le serveur tourne correctement.
 
->  ![image](images/3.jpeg)
+> ![image](images/3.jpeg)
 
 ---
 
-## 2. Automated Tests
+## 2. Tests Automatisés
 
 ### Description
 
-We set up automated tests to verify that the application is working correctly.
-These tests allow:
-- verifying that the main page responds correctly (status code 200)
-- verifying that the `/health` endpoint returns a valid status
+Nous avons mis en place des tests automatisés pour vérifier le bon fonctionnement de l'application.
+Ces tests permettent de :
+- vérifier que la page principale répond correctement (code HTTP 200)
+- vérifier que l'endpoint `/health` retourne un statut valide
 
 ---
 
-### Running the Tests
+### Lancement des Tests
 
-To run the tests:
+Pour exécuter les tests :
 
 ```bash
 npm test
@@ -96,22 +96,21 @@ npm test
 
 ---
 
-### Test Results
+### Résultats
 
-Tests should run without errors and display a positive result.
-
+Les tests doivent s'exécuter sans erreur et afficher un résultat positif.
 
 ```
 PASS test/app.test.js
 ```
 
->  ![image](images/4.jpeg)
+> ![image](images/4.jpeg)
 
 ---
 
-## 3. Project Structure
+## 3. Structure du Projet
 
-The project is organized as follows:
+Le projet est organisé de la façon suivante :
 
 ```
 projet/
@@ -125,42 +124,42 @@ projet/
       app.test.js
 ```
 
-Description of folders:
-- `public/` : contains static files (CV image)
-- `src/` : contains the application source code
-- `test/` : contains automated tests
+Description des dossiers :
+- `public/` : contient les fichiers statiques (image du CV)
+- `src/` : contient le code source de l'application
+- `test/` : contient les tests automatisés
 
->  ![image](images/5.jpeg)
+> ![image](images/5.jpeg)
 
 ---
 
-## 4. CI/CD Pipeline
+## 4. Pipeline CI/CD
 
 ### Description
 
-We set up a CI/CD pipeline using GitHub Actions.
-This pipeline allows:
-- automatically verifying that tests pass on every push
-- ensuring that the code on the `main` branch is always functional
+Nous avons mis en place un pipeline CI/CD avec GitHub Actions.
+Ce pipeline permet de :
+- vérifier automatiquement que les tests passent à chaque push
+- garantir que le code sur la branche `main` est toujours fonctionnel
 
-### Trigger
+### Déclenchement
 
-The pipeline is triggered automatically on every push or pull request on the `main` branch.
+Le pipeline se déclenche automatiquement à chaque push ou pull request sur la branche `main`.
 
-### Pipeline Steps
+### Étapes du Pipeline
 
-1. Checkout of the source code
-2. Installation of Node.js 20
-3. Installation of dependencies (`npm install`)
-4. Running tests (`npm test`)
+1. Récupération du code source (checkout)
+2. Installation de Node.js 20
+3. Installation des dépendances (`npm install`)
+4. Exécution des tests (`npm test`)
 
-### Configuration File
+### Fichier de Configuration
 
-The pipeline is defined in `.github/workflows/main.yml`.
+Le pipeline est défini dans `.github/workflows/main.yml`.
 
-### Expected Result
+### Résultat Attendu
 
-The pipeline should run without errors and display a green status.
+Le pipeline doit s'exécuter sans erreur et afficher un statut vert.
 
 > ![image](images/E1.jpeg)
 
@@ -170,43 +169,43 @@ The pipeline should run without errors and display a green status.
 
 ### Description
 
-We created a Linux virtual machine using Vagrant with VirtualBox.
-This VM allows reproducing an identical deployment environment for all project members.
+Nous avons créé une machine virtuelle Linux avec Vagrant et VirtualBox.
+Cette VM permet de reproduire un environnement de déploiement identique pour tous les membres du projet.
 
 > ![image](images/E6.jpeg)
 > ![image](images/E7.jpeg)
 
 ### Configuration
 
-- Box: `ubuntu/focal64`
-- Memory: 1024 MB
-- Port forwarding: 3000 (guest) → 3000 (host)
-- Synced folder: `webapp/` mounted at `/home/vagrant/webapp`
+- Box : `ubuntu/focal64`
+- Mémoire : 1024 Mo
+- Redirection de port : 3000 (VM) → 3000 (hôte)
+- Dossier partagé : `webapp/` monté sur `/home/vagrant/webapp`
 
-### Launch
+### Démarrage
 
-To start the VM:
+Pour lancer la VM :
 
 ```bash
 cd projet/iac
 vagrant up
 ```
- > ![image](images/E3.jpeg)
 
-### Verification
+> ![image](images/E3.jpeg)
 
-To verify that the VM is running:
+### Vérification
+
+Pour vérifier que la VM est en cours d'exécution :
 
 ```bash
 vagrant status
 ```
 
-### Expected Result
+### Résultat Attendu
 
-The VM starts correctly and the webapp folder is accessible from the VM.
+La VM démarre correctement et le dossier webapp est accessible depuis la VM.
 
 > ![image](images/E4.jpeg)
-
 
 ---
 
@@ -214,88 +213,88 @@ The VM starts correctly and the webapp folder is accessible from the VM.
 
 ### Description
 
-We used Ansible to automatically provision the VM.
-Provisioning is done via `ansible_local`, meaning Ansible installs and runs directly from the VM, without requiring installation on the host machine.
+Nous avons utilisé Ansible pour provisionner automatiquement la VM.
+Le provisionnement est effectué via `ansible_local`, ce qui signifie qu'Ansible s'installe et s'exécute directement depuis la VM, sans nécessiter d'installation sur la machine hôte.
 
-### Tasks Executed
+### Tâches Exécutées
 
-1. Update apt cache
-2. Install Node.js and npm
-3. Install application dependencies (`npm install`)
-4. Launch the application
+1. Mise à jour du cache apt
+2. Installation de Node.js et npm
+3. Installation des dépendances de l'application (`npm install`)
+4. Démarrage de l'application
 
-### Configuration File
+### Fichier de Configuration
 
-The playbook is defined in `iac/playbooks/playbook.yml`.
+Le playbook est défini dans `iac/playbooks/playbook.yml`.
 
-### Expected Result
+### Résultat Attendu
 
-Once provisioning is complete, the application is accessible from the VM:
+Une fois le provisionnement terminé, l'application est accessible depuis la VM :
 
 ```bash
 curl http://localhost:3000
 curl http://localhost:3000/health
 ```
 
-Expected results:
-- `/` : displays the CV HTML
-- `/health` : returns `{"status":"ok"}`
+Résultats attendus :
+- `/` : affiche le HTML du CV
+- `/health` : retourne `{"status":"ok"}`
 
 > ![image](images/E5.jpeg)
 
+> ![image](images/E8.jpeg)
 
- >  ![image](images/E8.jpeg)
 ---
 
 ## 7. Docker
 
 ### Description
 
-We containerized the application using Docker to ensure it runs consistently across any environment.
+Nous avons conteneurisé l'application avec Docker afin de garantir son exécution de manière cohérente dans n'importe quel environnement.
 
 ### Dockerfile
 
-The `Dockerfile` is located at `webapp/Dockerfile`.
+Le `Dockerfile` se trouve dans `webapp/Dockerfile`.
 
-### Build the Image
+### Construction de l'Image
 
 ```bash
 cd projet/webapp
 docker build -t myapp .
 ```
 
->  ![image](images/71.jpg)
+> ![image](images/71.jpg)
 
-### Run the Container
+### Lancement du Conteneur
 
 ```bash
 docker run -p 3000:3000 myapp
 ```
 
-The application is then accessible at:
+L'application est alors accessible à l'adresse :
 
 ```
 http://localhost:3000
 ```
 
->  ![image](images/72.jpg)
+> ![image](images/72.jpg)
 
 ### Docker Hub
 
-The image is publicly available on Docker Hub:
+L'image est disponible publiquement sur Docker Hub :
 
 ```
 https://hub.docker.com/r/TON_USERNAME/myapp
 ```
 
-To pull and run the image directly:
+Pour télécharger et lancer l'image directement :
 
 ```bash
 docker pull chloelstc/myapp:latest
 docker run -p 3000:3000 chloelstc/myapp:latest
 ```
 
->  ![image](images/73.jpg)
+> ![image](images/73.jpg)
 
 ---
 
@@ -303,95 +302,94 @@ docker run -p 3000:3000 chloelstc/myapp:latest
 
 ### Description
 
-We deployed the application on a local Kubernetes cluster using Minikube.
+Nous avons déployé l'application sur un cluster Kubernetes local avec Minikube.
 
-### Prerequisites
+### Prérequis
 
-- [Minikube](https://minikube.sigs.k8s.io/docs/start/) installed
-- [kubectl](https://kubernetes.io/docs/tasks/tools/) installed
-- Docker Desktop running
+- [Minikube](https://minikube.sigs.k8s.io/docs/start/) installé
+- [kubectl](https://kubernetes.io/docs/tasks/tools/) installé
+- Docker Desktop en cours d'exécution
 
-### Start Minikube
+### Démarrage de Minikube
 
 ```bash
 minikube start --driver=docker
 ```
- > ![image](images/81.jpg)
- >  ![image](images/82.jpg)
 
-### Manifest Files
+> ![image](images/81.jpg)
+> ![image](images/82.jpg)
 
-The Kubernetes manifests are located in the `k8s/` folder:
-- `k8s/deployment.yaml` : defines the application deployment (2 replicas)
-- `k8s/service.yaml` : exposes the application via a NodePort
+### Fichiers Manifestes
 
-### Deploy the Application
+Les manifestes Kubernetes se trouvent dans le dossier `k8s/` :
+- `k8s/deployment.yaml` : définit le déploiement de l'application (2 réplicas)
+- `k8s/service.yaml` : expose l'application via un NodePort
+
+### Déploiement de l'Application
 
 ```bash
 kubectl apply -f k8s/deployment.yaml
 kubectl apply -f k8s/service.yaml
 ```
- > ![image](images/92.jpg)
 
-### Verify the Deployment
+> ![image](images/92.jpg)
+
+### Vérification du Déploiement
 
 ```bash
 kubectl get pods
 kubectl get services
 ```
->  ![image](images/91.jpg)
 
+> ![image](images/91.jpg)
 
-### Access the Application
+### Accès à l'Application
 
 ```bash
 minikube service myapp-service
 ```
 
-This command opens the application automatically in my browser.
+Cette commande ouvre automatiquement l'application dans le navigateur.
 
->  ![image](images/93.jpg)
->  ![image](images/94.jpg)
+> ![image](images/93.jpg)
+> ![image](images/94.jpg)
 
 ---
 
-## 9. Difficulties Encountered
+## 9. Difficultés Rencontrées
 
 ### CI/CD — GitHub Actions
 
-During the CI/CD pipeline setup, we encountered several issues.
+Lors de la mise en place du pipeline CI/CD, nous avons rencontré plusieurs problèmes.
 
-The first problem was related to an old `node.js.yml` workflow file linked to a previous lab, which pointed to a non-existent folder. This file was triggering a failing pipeline on every push. The solution was to delete this file and keep only our `main.yml` pipeline.
+Le premier concernait un ancien fichier de workflow `node.js.yml` lié à un TP précédent, qui pointait vers un dossier inexistant. Ce fichier déclenchait un pipeline en échec à chaque push. La solution a été de le supprimer et de ne conserver que notre pipeline `main.yml`.
 
-The second problem was related to the location of `main.yml`. We had placed it in `projet/.github/workflows/` whereas GitHub Actions only recognizes workflows if they are located at the root of the repository in `/.github/workflows/`. Once the file was moved to the correct location, the pipeline ran correctly.
+Le deuxième problème portait sur l'emplacement de `main.yml`. Nous l'avions placé dans `projet/.github/workflows/` alors que GitHub Actions ne reconnaît les workflows que s'ils se trouvent à la racine du dépôt dans `/.github/workflows/`. Une fois le fichier déplacé au bon endroit, le pipeline s'est exécuté correctement.
 
-The third problem concerned the `working-directory` path in the workflow file. We had to specify `projet/webapp` instead of simply `webapp` because the source code is located in a subfolder of the repository.
+Le troisième problème concernait le chemin `working-directory` dans le fichier de workflow. Nous avons dû indiquer `projet/webapp` plutôt que simplement `webapp`, car le code source se trouve dans un sous-dossier du dépôt.
 
 ### Vagrant
 
-The main difficulty encountered with Vagrant was an accidental interruption of the VM startup process with `Ctrl+C`. This created a lock that prevented any new launch with the message `another process is already executing an action`. The solution was to wait for the process to finish naturally before relaunching `vagrant up`.
+La principale difficulté rencontrée avec Vagrant a été une interruption accidentelle du démarrage de la VM avec `Ctrl+C`. Cela a créé un verrou empêchant tout nouveau lancement avec le message `another process is already executing an action`. La solution a été d'attendre que le processus se termine naturellement avant de relancer `vagrant up`.
 
-We also noted a warning related to a version incompatibility between VirtualBox Guest Additions (6.1.50) and VirtualBox itself (7.2). This did not prevent the project from working correctly.
+Nous avons également noté un avertissement lié à une incompatibilité de version entre les VirtualBox Guest Additions (6.1.50) et VirtualBox lui-même (7.2), mais cela n'a pas empêché le projet de fonctionner correctement.
 
 ### Ansible
 
-Automatic provisioning via Ansible did not install Node.js dependencies correctly on the first launch. The Ansible `npm` module did not work as expected, preventing the application from starting with the error `Cannot find module 'express'`. The solution was to replace the `npm` module with a direct `npm install` command via Ansible's `command` module, which resolved the issue.
+Le provisionnement automatique via Ansible n'a pas installé correctement les dépendances Node.js lors du premier lancement. Le module `npm` d'Ansible n'a pas fonctionné comme attendu, empêchant l'application de démarrer avec l'erreur `Cannot find module 'express'`. La solution a été de remplacer le module `npm` par une commande `npm install` directe via le module `command` d'Ansible, ce qui a résolu le problème.
 
 ### Docker
 
-Docker Desktop occasionally failed to start automatically on Windows. The solution was to run Docker Desktop as administrator and ensure WSL2 was up to date via `wsl --update`.
+Docker Desktop ne démarrait parfois pas automatiquement sur Windows. La solution a été de lancer Docker Desktop en tant qu'administrateur et de s'assurer que WSL2 était à jour via `wsl --update`.
 
 ### Kubernetes
 
-The `minikube` and `kubectl` commands were not recognized in the VS Code integrated terminal after installation. This was caused by the PATH environment variable not being reloaded. The solution was to fully restart VS Code so that the terminal picked up the updated PATH.
+Les commandes `minikube` et `kubectl` n'étaient pas reconnues dans le terminal intégré de VS Code après leur installation. Cela était dû à la variable d'environnement PATH qui n'avait pas été rechargée. La solution a été de redémarrer complètement VS Code pour que le terminal prenne en compte le PATH mis à jour.
 
 ---
 
-## 10. Authors
+## 10. Auteurs
 
-- **Clara** — Web application, tests
-- **Édouard** — CI/CD pipeline, Vagrant, Ansible
-- **Chloé** — Docker, Kubernetes, README finalization
-
----
-
+- **Clara** — Application web, tests
+- **Édouard** — Pipeline CI/CD, Vagrant, Ansible
+- **Chloé** — Docker, Kubernetes, finalisation du README
